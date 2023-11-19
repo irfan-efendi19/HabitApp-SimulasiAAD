@@ -33,35 +33,23 @@ class RandomHabitActivity : AppCompatActivity() {
 
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[RandomHabitViewModel::class.java]
+        
+        viewModel.priorityLevelHigh.observe(this) { priorityLevel ->
+            priorityLevel?.let {
+                adapter.submitData(RandomHabitAdapter.PageType.HIGH, it)
+            }
+        }
 
+        viewModel.priorityLevelMedium.observe(this) { priorityLevel ->
+            priorityLevel?.let {
+                adapter.submitData(RandomHabitAdapter.PageType.MEDIUM, it)
+            }
+        }
 
-        viewModel.priorityLevelHigh.observe(this) {
-            adapter.submitData(RandomHabitAdapter.PageType.HIGH, it)
+        viewModel.priorityLevelLow.observe(this) { priorityLevel ->
+            priorityLevel?.let {
+                adapter.submitData(RandomHabitAdapter.PageType.LOW, it)
+            }
         }
-        viewModel.priorityLevelMedium.observe(this) {
-            adapter.submitData(RandomHabitAdapter.PageType.MEDIUM, it)
-        }
-        viewModel.priorityLevelLow.observe(this) {
-            adapter.submitData(RandomHabitAdapter.PageType.LOW, it)
-        }
-//        if (checkNotNull(false)) {
-//            viewModel.priorityLevelHigh.observe(this) { priorityLevel ->
-//                priorityLevel?.let {
-//                    adapter.submitData(RandomHabitAdapter.PageType.HIGH, it)
-//                }
-//            }
-//
-//            viewModel.priorityLevelMedium.observe(this) { priorityLevel ->
-//                priorityLevel?.let {
-//                    adapter.submitData(RandomHabitAdapter.PageType.MEDIUM, it)
-//                }
-//            }
-//
-//            viewModel.priorityLevelLow.observe(this) { priorityLevel ->
-//                priorityLevel?.let {
-//                    adapter.submitData(RandomHabitAdapter.PageType.LOW, it)
-//                }
-//            }
-//        }
     }
 }
